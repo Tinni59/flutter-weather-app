@@ -1,7 +1,5 @@
-import 'dart:convert';
-import 'package:crypto/crypto.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import '../services/auth_service.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -11,49 +9,52 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
-
-  String hashPassword(String password) {
-    return sha256.convert(utf8.encode(password)).toString();
-  }
-
-  Future<void> register() async {
-    final prefs = await SharedPreferences.getInstance();
-
-    await prefs.setString('email', emailController.text.trim());
-    await prefs.setString('password', hashPassword(passwordController.text));
-
-    ScaffoldMessenger.of(
-      context,
-    ).showSnackBar(const SnackBar(content: Text('Регистрация успешна')));
-
-    Navigator.pop(context);
-  }
+  final loginCtrl = TextEditingController();
+  final passCtrl = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Регистрация')),
-      body: Padding(
-        padding: const EdgeInsets.all(20),
-        child: Column(
-          children: [
-            TextField(
-              controller: emailController,
-              decoration: const InputDecoration(labelText: 'Email'),
-            ),
-            TextField(
-              controller: passwordController,
-              decoration: const InputDecoration(labelText: 'Пароль'),
-              obscureText: true,
-            ),
-            const SizedBox(height: 30),
-            ElevatedButton(
-              onPressed: register,
-              child: const Text('Создать аккаунт'),
-            ),
-          ],
+      backgroundColor: const Color.fromARGB(255, 150, 94, 206),
+      body: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(24),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Text(
+                'Регистрация',
+                style: TextStyle(color: Colors.white, fontSize: 28),
+              ),
+              const SizedBox(height: 20),
+              TextField(
+                controller: loginCtrl,
+                decoration: const InputDecoration(
+                  hintText: 'Логин',
+                  filled: true,
+                  fillColor: Colors.white,
+                ),
+              ),
+              const SizedBox(height: 10),
+              TextField(
+                controller: passCtrl,
+                obscureText: true,
+                decoration: const InputDecoration(
+                  hintText: 'Пароль',
+                  filled: true,
+                  fillColor: Colors.white,
+                ),
+              ),
+              const SizedBox(height: 15),
+              ElevatedButton(
+                onPressed: () async {
+                  await AuthService.register(loginCtrl.text, passCtrl.text);
+                  Navigator.pop(context);
+                },
+                child: const Text('Зарегистрироваться'),
+              ),
+            ],
+          ),
         ),
       ),
     );

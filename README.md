@@ -1,16 +1,66 @@
-# weather_app
+# Flutter Weather & Auth App
 
-A new Flutter project.
+Учебное Flutter-приложение с авторизацией, регистрацией, локальными уведомлениями, навигацией между экранами и отображением погоды.
 
-## Getting Started
+---
 
-This project is a starting point for a Flutter application.
+## Автор
 
-A few resources to get you started if this is your first Flutter project:
+**Колегова Виктория**  
+Группа: **9-3-ПО-22**
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+---
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Описание проекта
+
+Данное приложение разработано в рамках учебы и демонстрирует работу со следующими возможностями Flutter:
+
+- Регистрация пользователя (SharedPreferences)
+- Авторизация пользователя (SharedPreferences)
+- Хеширование пароля
+- Навигация между экранами
+- Локальные уведомления
+- Отображение погоды
+
+---
+
+## Функционал
+
+- Регистрация и вход в систему
+- Безопасное хранение данных пользователя (хеширование)
+- Навигация между экранами
+- Локальные уведомления
+- Экран погоды
+
+---
+
+## Запуск проекта
+
+### 1. Установка зависимостей
+```bash
+flutter pub get
+
+### 2. Запуск в браузере
+```bash
+flutter run -d chrome
+
+### 3. Запуск на Android эмуляторе
+```bash
+flutter run
+
+---
+
+## Используемые технологии
+
+- Flutter
+- Dart
+- SharedPreferences
+- flutter_local_notifications
+
+---
+
+## Примечание
+
+Для корректной работы локальных уведомлений необходимо запускать приложение на Android-эмуляторе или реальном устройстве.
+
+---
